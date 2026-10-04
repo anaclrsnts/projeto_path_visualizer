@@ -1,0 +1,296 @@
+:root {
+  --bg: #0b1020;
+  --surface: #121a2f;
+  --soft: #19233d;
+  --text: #f4f7ff;
+  --muted: #9ba8c7;
+  --border: #2a3658;
+  --primary: #7c8cff;
+  --start: #2dd4bf;
+  --end: #fb7185;
+  --wall: #26324f;
+  --visited: #4867d6;
+  --path: #facc15;
+
+  font-family: Inter, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(124, 140, 255, 0.16),
+      transparent 32%
+    ),
+    var(--bg);
+  color: var(--text);
+}
+
+button,
+select {
+  font: inherit;
+}
+
+.topbar,
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: auto;
+}
+
+.topbar {
+  padding: 42px 0 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  letter-spacing: -0.05em;
+}
+
+.topbar p:last-child {
+  color: var(--muted);
+}
+
+.app-shell {
+  padding-bottom: 56px;
+}
+
+.toolbar,
+.legend,
+.status-panel,
+.board-panel {
+  border: 1px solid var(--border);
+  background: rgba(18, 26, 47, 0.9);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.toolbar label {
+  display: flex;
+  min-width: 230px;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.toolbar label span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+select {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--soft);
+  color: var(--text);
+  padding: 0 12px;
+}
+
+.button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.secondary {
+  border-color: var(--border);
+  background: var(--soft);
+  color: var(--text);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 14px 0;
+  border-radius: 16px;
+  padding: 13px 16px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+}
+
+.box.start {
+  background: var(--start);
+}
+
+.box.end {
+  background: var(--end);
+}
+
+.box.wall {
+  background: var(--wall);
+}
+
+.box.visited {
+  background: var(--visited);
+}
+
+.box.path {
+  background: var(--path);
+}
+
+.board-panel {
+  overflow-x: auto;
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.grid {
+  display: grid;
+  width: min(100%, 960px);
+  min-width: 720px;
+  margin: auto;
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+  aspect-ratio: 20 / 12;
+  user-select: none;
+  touch-action: none;
+}
+
+.node {
+  position: relative;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0f172a;
+  transition: 0.12s;
+}
+
+.node.start {
+  background: var(--start);
+}
+
+.node.end {
+  background: var(--end);
+}
+
+.node.wall {
+  border-radius: 3px;
+  background: var(--wall);
+  transform: scale(0.92);
+}
+
+.node.visited {
+  background: var(--visited);
+  animation: pulse 0.22s;
+}
+
+.node.path {
+  background: var(--path);
+  animation: pop 0.22s;
+}
+
+.node.start::after,
+.node.end::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #08111f;
+  font-weight: 900;
+}
+
+.node.start::after {
+  content: "S";
+}
+
+.node.end::after {
+  content: "E";
+}
+
+.status-panel {
+  margin-top: 14px;
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.status-panel p {
+  margin: 0;
+  color: var(--muted);
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.35;
+    transform: scale(0.65);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+  }
+
+  70% {
+    transform: scale(1.16);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 720px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar label,
+  .button {
+    width: 100%;
+  }
+}
