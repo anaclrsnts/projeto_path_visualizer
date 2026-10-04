@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathfinding Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <p class="eyebrow">algorithms in motion</p>
+    <h1>Pathfinding Visualizer</h1>
+    <p>Crie paredes, mova início e destino e visualize BFS, Dijkstra e A*.</p>
+  </header>
+
+  <main class="app-shell">
+    <section class="toolbar">
+      <label>
+        <span>Algoritmo</span>
+        <select id="algorithm-select">
+          <option value="astar">A*</option>
+          <option value="dijkstra">Dijkstra</option>
+          <option value="bfs">Breadth-First Search</option>
+        </select>
+      </label>
+      <button id="visualize-button" class="button primary">Visualizar</button>
+      <button id="clear-path-button" class="button secondary">Limpar caminho</button>
+      <button id="clear-board-button" class="button secondary">Limpar grade</button>
+    </section>
+
+    <section class="legend">
+      <span><i class="box start"></i> Início</span>
+      <span><i class="box end"></i> Destino</span>
+      <span><i class="box wall"></i> Parede</span>
+      <span><i class="box visited"></i> Visitado</span>
+      <span><i class="box path"></i> Caminho</span>
+    </section>
+
+    <section class="board-panel">
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <section class="status-panel">
+      <p id="status-text">Clique e arraste para criar paredes. Arraste S e E para movê-los.</p>
+    </section>
+  </main>
+</body>
+</html>
